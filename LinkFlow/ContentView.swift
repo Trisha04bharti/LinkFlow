@@ -114,40 +114,106 @@ import SwiftUI
 //    }
 //}
 
-
 import SwiftUI
 
 struct ContentView: View {
     
     @State private var searchText = ""
+    @State private var showFavoritesOnly = false
+    @State private var sortAscending = true
     
     let columns = Array(repeating: GridItem(.flexible()), count: 3)
     
-    // 🔍 Filter logic
+    // MARK: - Filter + Sort
+    
     var filteredApps: [AppItem] {
-        if searchText.isEmpty {
-            return appList
-        } else {
-            return appList.filter {
+        var result = appList
+        
+        // Filter by search
+        if !searchText.isEmpty {
+            result = result.filter {
                 $0.name.localizedCaseInsensitiveContains(searchText)
             }
         }
+        
+        // Filter favorites
+        if showFavoritesOnly {
+            result = result.filter { $0.isFavorite }
+        }
+        
+        // Sort
+        result.sort {
+            sortAscending
+            ? $0.name < $1.name
+            : $0.name > $1.name
+        }
+        
+        return result
     }
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                LazyVGrid(columns: columns, spacing: 20) {
-                    
-                    ForEach(filteredApps) { app in
-                        AppCell(app: app)
+            VStack {
+                
+                // MARK: - Segmented Control
+                
+                Picker("Filter", selection: $showFavoritesOnly) {
+                    Text("All").tag(false)
+                    Text("Favorites").tag(true)
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal)
+                
+                // MARK: - Grid
+                
+                if filteredApps.isEmpty {
+                    emptyStateView
+                } else {
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 20) {
+                            
+                            ForEach(filteredApps) { app in
+                                AppCell(app: app)
+                                    .animation(.easeInOut, value: filteredApps)
+                            }
+                        }
+                        .padding()
                     }
                 }
-                .padding()
             }
             .navigationTitle("LinkFlow")
-            .searchable(text: $searchText) // 🔥 search bar
+            .searchable(text: $searchText)
+            
+            // MARK: - Toolbar
+            
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        sortAscending.toggle()
+                    } label: {
+                        Image(systemName: sortAscending ? "arrow.up" : "arrow.down")
+                    }
+                }
+            }
         }
+    }
+    
+    // MARK: - Empty State
+    
+    var emptyStateView: some View {
+        VStack(spacing: 12) {
+            Image(systemName: "magnifyingglass")
+                .font(.largeTitle)
+                .foregroundColor(.gray)
+            
+            Text("No results found")
+                .font(.headline)
+            
+            Text("Try searching something else")
+                .font(.subheadline)
+                .foregroundColor(.gray)
+        }
+        .padding()
     }
 }
 

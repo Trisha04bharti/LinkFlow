@@ -11,4 +11,5 @@ struct AppItem: Identifiable {
     let name: String
     let url: String
     let icon: String
+    var isFavorite: Bool
 }
