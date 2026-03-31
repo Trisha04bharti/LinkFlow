@@ -6,9 +6,15 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct LinkFlowApp: App {
+    
+    init() {
+          FirebaseApp.configure()   // ✅ ADD THIS
+      }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
