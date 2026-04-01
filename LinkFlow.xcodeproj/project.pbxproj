@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		C611DF4B2F7012EE00A03938 /* ShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C611DF412F7012EE00A03938 /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C6E1BC282F7BC9300022A4AA /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C6E1BC272F7BC9300022A4AA /* FirebaseAuth */; };
+		C6E1BC2A2F7BC9460022A4AA /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = C6E1BC292F7BC9460022A4AA /* FirebaseFirestore */; };
+		C6E1BC2C2F7BC94F0022A4AA /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = C6E1BC2B2F7BC94F0022A4AA /* FirebaseCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +80,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6E1BC282F7BC9300022A4AA /* FirebaseAuth in Frameworks */,
+				C6E1BC2C2F7BC94F0022A4AA /* FirebaseCore in Frameworks */,
+				C6E1BC2A2F7BC9460022A4AA /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +94,7 @@
 			children = (
 				C6E17A042F6FCD05003CDF8C /* LinkFlow */,
 				C611DF422F7012EE00A03938 /* ShareExtension */,
+				C6E1BC262F7BC9300022A4AA /* Frameworks */,
 				C6E17A032F6FCD05003CDF8C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -99,6 +106,13 @@
 				C611DF412F7012EE00A03938 /* ShareExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C6E1BC262F7BC9300022A4AA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,6 +159,9 @@
 			);
 			name = LinkFlow;
 			packageProductDependencies = (
+				C6E1BC272F7BC9300022A4AA /* FirebaseAuth */,
+				C6E1BC292F7BC9460022A4AA /* FirebaseFirestore */,
+				C6E1BC2B2F7BC94F0022A4AA /* FirebaseCore */,
 			);
 			productName = LinkFlow;
 			productReference = C6E17A022F6FCD05003CDF8C /* LinkFlow.app */;
@@ -505,6 +522,24 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C6E1BC272F7BC9300022A4AA /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C6E1BC252F7BC5490022A4AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		C6E1BC292F7BC9460022A4AA /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C6E1BC252F7BC5490022A4AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		C6E1BC2B2F7BC94F0022A4AA /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C6E1BC252F7BC5490022A4AA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C6E179FA2F6FCD05003CDF8C /* Project object */;
 }
